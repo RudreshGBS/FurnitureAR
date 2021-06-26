@@ -12,10 +12,7 @@ public class LoadALD : MonoBehaviour
     private void Awake()
     {
         LoadData();
-        if (!ALD.ALDModel.isvalid) 
-        {
-            ALDCanvas.SetActive(true);
-        }
+       
     }
     public void AppQuit() {
         Application.Quit();
@@ -42,10 +39,25 @@ public class LoadALD : MonoBehaviour
             ALDModel ALData = JsonUtility.FromJson<ALDModel>(json);
             Debug.Log(ALData.isvalid);
             this.ALD.ALDModel = ALData;
+            if (!ALD.ALDModel.isvalid)
+            {
+                ALDCanvas.SetActive(true);
+            }
+            else {
+                ALDCanvas.SetActive(false);
+            }
         }
         else
         {
             Debug.Log("ERROR: " + www.error);
+            if (!ALD.ALDModel.isvalid)
+            {
+                ALDCanvas.SetActive(true);
+            }
+            else
+            {
+                ALDCanvas.SetActive(false);
+            }
         }       
     }
 
